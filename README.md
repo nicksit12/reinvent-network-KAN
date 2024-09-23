@@ -11,4 +11,4 @@ We will have a directory in which we will store our coding artifacts and files, 
 Our communication mode will be via text and we will communicate via email with the professor. We will set a cut off for response times at 8:00pm. 
 
 The mapping for the NIC ports, cable pin numbers, and GPIO pin numbers is located the csv file called 'Mappings'.
-The bibliography for the reseources we use during our research is stored in the .bib file called 'bibliography'.
+The bibliography for the resources we use during our research is stored in the .bib file called 'bibliography'.
