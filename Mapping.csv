@@ -1,0 +1,41 @@
+﻿Cable Pin Number,NIC Port/Role/Name,GPIO Pin 
+1,3.3 VDC,
+2,5.0 VDC,
+3,,8 SDA1 (12C)
+4,5.0 VDC,
+5,,9 SCL1(12C)
+6,Ground,
+7,,7 GPCLK0
+8,,15 TxD (UART)
+9,Ground,
+10,,16 RxD (UART)
+11,,0
+12,, 1 (PCM_CLK/PWM0)
+13,,2
+14,Ground,
+15,,3
+16,,4
+17,3.3 VDC,
+18,,5
+19,,12 MOSI (SPI)
+20,Ground,
+21,,13 MISO (SPI)
+22,,6
+23,,14 SCLK (SPI)
+24,,10 CE0 (SPI)
+25,Ground,
+26,,11 CE1 (SPI)
+27,,30 SDA0 (12C ID EEPROM)
+28,,31 SCL0 (12C ID EEPROM)
+29,,21 GPCLK1
+30,Ground,
+31,,22 GPCLK2
+32,,26 PWM0
+33,,23 PWM1
+34,Ground,
+35,,24 PCM_FS/PWM1
+36,,27
+37,,25
+38,,28 PCM_DIN
+39,Ground,
+40,,29 PCM_DOUT
