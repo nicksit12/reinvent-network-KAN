@@ -12,3 +12,5 @@ Our communication mode will be via text and we will communicate via email with t
 
 The mapping for the NIC ports, cable pin numbers, and GPIO pin numbers is located the csv file called 'Mappings'.
 The bibliography for the resources we use during our research is stored in the .bib file called 'bibliography'.
+
+The file 'blink.c' contains the test code we created as a team to test the LED lights on our ports. 
