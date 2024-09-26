@@ -14,3 +14,5 @@ The mapping for the NIC ports, cable pin numbers, and GPIO pin numbers is locate
 The bibliography for the resources we use during our research is stored in the .bib file called 'bibliography'.
 
 The file 'blink.c' contains the test code we created as a team to test the LED lights on our ports. 
+
+The file 'Framing.c' currently holds the first version of our code to creating frames to send packets from one computer to another. 
