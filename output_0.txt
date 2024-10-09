@@ -1,0 +1,470 @@
+Starting program
+pigpio started with handle 0
+Initializing port 0: rx_pin=26, tx_pin=27
+Initializing port 1: rx_pin=24, tx_pin=25
+Initializing port 2: rx_pin=22, tx_pin=23
+Initializing port 3: rx_pin=20, tx_pin=21
+> Enter message: RX Callback on port 0: level=0, tick=810044420, time_diff=810044420, margin_ratio=162008.89
+RX Callback on port 0: level=1, tick=810049250, time_diff=4830, margin_ratio=0.97
+Sync pattern detected on port 0
+RX Callback on port 0: level=0, tick=810054420, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=810056750, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=810059420, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=810061750, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=810064415, time_diff=2665, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=810066751, time_diff=2336, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=810069420, time_diff=2669, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=810071750, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=810074420, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=810076750, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=810079420, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=810084255, time_diff=4835, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=810089420, time_diff=5165, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+Converting bits to char on port 0:  => 0x02
+RX Callback on port 0: level=1, tick=810091750, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=810094420, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=810099250, time_diff=4830, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=810101920, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=810104250, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=810109420, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=810114250, time_diff=4830, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=810119420, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=810121750, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=810124415, time_diff=2665, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=810126750, time_diff=2335, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=810129420, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+Converting bits to char on port 0:  => 0x68
+
+[Port 0] Checksum mismatch. Discarding message.
+RX Callback on port 0: level=1, tick=810131750, time_diff=2330, margin_ratio=0.47
+RX Callback on port 0: level=0, tick=810134420, time_diff=2670, margin_ratio=0.53
+RX Callback on port 0: level=1, tick=810139250, time_diff=4830, margin_ratio=0.97
+Sync pattern detected on port 0
+RX Callback on port 0: level=0, tick=810141920, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=810144250, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=810149420, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=810154256, time_diff=4836, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=810159420, time_diff=5164, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=810161750, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=810164421, time_diff=2671, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=810166751, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=810169420, time_diff=2669, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812577732, time_diff=2408312, margin_ratio=481.66
+Sync detected on port 0
+Timing error on port 0, resetting channel
+RX Callback on port 0: level=0, tick=812580392, time_diff=2660, margin_ratio=0.53
+RX Callback on port 0: level=1, tick=812585222, time_diff=4830, margin_ratio=0.97
+Sync pattern detected on port 0
+RX Callback on port 0: level=0, tick=812590391, time_diff=5169, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=812592722, time_diff=2331, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812595392, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812597722, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812600392, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812602722, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812605392, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812607722, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812610392, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812615222, time_diff=4830, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=812620392, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=812622722, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812625392, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+Converting bits to char on port 0:  => 0x04
+RX Callback on port 0: level=1, tick=812627722, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812630392, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812635222, time_diff=4830, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=812637892, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812640222, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812642892, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812645222, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812650392, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=812655222, time_diff=4830, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=812657887, time_diff=2665, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812660222, time_diff=2335, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812662892, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812665222, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+Converting bits to char on port 0:  => 0x77
+RX Callback on port 0: level=0, tick=812670392, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=812675222, time_diff=4830, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=812677892, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812680223, time_diff=2331, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812685392, time_diff=5169, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=812690222, time_diff=4830, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=812692887, time_diff=2665, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812695222, time_diff=2335, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812697892, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812700223, time_diff=2331, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812702892, time_diff=2669, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812705222, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+Converting bits to char on port 0:  => 0x6F
+RX Callback on port 0: level=0, tick=812710392, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=812715222, time_diff=4830, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=812717892, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812720222, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812722892, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812725222, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812730392, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=812735222, time_diff=4830, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=812737892, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812740222, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812742892, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812745222, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+Converting bits to char on port 0:  => 0x77
+
+[Port 0] Checksum mismatch. Discarding message.
+RX Callback on port 0: level=0, tick=812750392, time_diff=5170, margin_ratio=1.03
+RX Callback on port 0: level=1, tick=812755222, time_diff=4830, margin_ratio=0.97
+Sync pattern detected on port 0
+RX Callback on port 0: level=0, tick=812760392, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=812765222, time_diff=4830, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=812767892, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812770222, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812772892, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=812775222, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=812780392, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=812785222, time_diff=4830, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=815396544, time_diff=2611322, margin_ratio=522.26
+Sync detected on port 0
+Timing error on port 0, resetting channel
+RX Callback on port 0: level=1, tick=815401374, time_diff=4830, margin_ratio=0.97
+Sync pattern detected on port 0
+RX Callback on port 0: level=0, tick=815406544, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=815408874, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=815411544, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=815413874, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=815416544, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=815418874, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=815421539, time_diff=2665, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=815423874, time_diff=2335, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=815426544, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=815428874, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=815431544, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=815436374, time_diff=4830, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=815441544, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+Converting bits to char on port 0:  => 0x02
+RX Callback on port 0: level=1, tick=815443874, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=815446544, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=815448875, time_diff=2331, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=815451539, time_diff=2664, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=815456374, time_diff=4835, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=815461544, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=815466374, time_diff=4830, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=815469044, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=815471374, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=815474044, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=815476374, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=815481544, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+Converting bits to char on port 0:  => 0x2E
+
+[Port 0] Checksum mismatch. Discarding message.
+RX Callback on port 0: level=1, tick=815483874, time_diff=2330, margin_ratio=0.47
+RX Callback on port 0: level=0, tick=815486544, time_diff=2670, margin_ratio=0.53
+RX Callback on port 0: level=1, tick=815488874, time_diff=2330, margin_ratio=0.47
+RX Callback on port 0: level=0, tick=815491544, time_diff=2670, margin_ratio=0.53
+RX Callback on port 0: level=1, tick=815496374, time_diff=4830, margin_ratio=0.97
+Sync pattern detected on port 0
+RX Callback on port 0: level=0, tick=815501544, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=815506374, time_diff=4830, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=0, tick=815509044, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=815511374, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=815514044, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=815516374, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=815521544, time_diff=5170, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=816787987, time_diff=1266443, margin_ratio=253.29
+Sync detected on port 0
+Timing error on port 0, resetting channel
+RX Callback on port 0: level=0, tick=816790647, time_diff=2660, margin_ratio=0.53
+RX Callback on port 0: level=1, tick=816795482, time_diff=4835, margin_ratio=0.97
+Sync pattern detected on port 0
+RX Callback on port 0: level=0, tick=816800647, time_diff=5165, margin_ratio=1.03
+Sync detected on port 0
+full bit detected on link 0
+RX Callback on port 0: level=1, tick=816802977, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=816805647, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=816807977, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=816810647, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=816812977, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=816815648, time_diff=2671, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=816817977, time_diff=2329, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=816820647, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=816822977, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=816825647, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=816827977, time_diff=2330, margin_ratio=0.47
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=0, tick=816830647, time_diff=2670, margin_ratio=0.53
+Sync detected on port 0
+Half bit detected on link 0
+RX Callback on port 0: level=1, tick=816835477, time_diff=4830, margin_ratio=0.97
+Sync detected on port 0
+full bit detected on link 0
+Converting bits to char on port 0:  => 0x01
+
+[Port 0] Checksum mismatch. Discarding message.
