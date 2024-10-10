@@ -27,8 +27,7 @@ static int find_route(uint8_t* dest_ip) {
 
 // Initialize the network layer
 void network_layer_init() {
-    // This function can perform any additional setup required for the network layer
-    user_msg_handler = receive_packet; // Set the link layer's receive callback to network layer's receive handler
+    user_msg_handler = receive_packet; 
 }
 
 // Send a packet to a specific destination IP address
