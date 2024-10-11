@@ -66,10 +66,10 @@ static uint8_t compute_checksum(uint8_t *data, uint8_t len) {
 
 // convert received bits into a character and assemble the message
 static void bit_to_char(int ch_index) {
-    ChannelState *ch_state = &port_state[ch_index];
+    ChannelState *ch_state = &port_states[ch_index];
     uint8_t full_byte = 0;
 
-    printf("Converting bits to char on port %d: ", port_index);
+    printf("Converting bits to char on port %d: ", ch_index);
 
     for (int i = 0; i < 8; i++) {
         full_byte |= ch_state->bit_buffer[i] << (7 - i);
@@ -112,7 +112,7 @@ static void rx_callback(int pi, unsigned gpio, unsigned level, uint32_t tick) {
     int ch_index = gpio_to_port(gpio); 
     if (ch_index == -1) return;
 
-    ChannelState *ch_state = &port_state[ch_index]; 
+    ChannelState *ch_state = &port_states[ch_index]; 
 
     // Calculate the time difference between the current and previous signal edges
     uint32_t time_diff = (tick >= ch_state->prev_tick) ? (tick - ch_state->prev_tick) 
@@ -232,24 +232,16 @@ void manchester_transmit(int ch, uint8_t *data, uint8_t len) {
     int wave_id = wave_create(gpio_handle);
     printf("Wave ID: %d\n", wave_id);
     wave_send_once(gpio_handle, wave_id);
-    usleep(BIT_DURATION_US * (2 + (8 * total_bytes) + 1));
+    usleep(BIT_DURATION_US * (2 + (8 * total_bytes) + 2));
 }
 
 
 
 void print_callback(uint8_t* msg, int ch) {
+    
     uint8_t msg_len = msg[0] - 1; // Adjust length to exclude checksum byte
 
     printf("\n On Port: %d Recieved: ", ch);
-    for (int i = 1; i <= msg_len; i++) {
-        printf("%c", msg[i]);
-    }
-    printf("\n");
-    fflush(stdout);
-
-    printf("Broadcasting received message from port %d\n", ch);
-    manchester_transmit(-1, &msg[1], msg_len);
-    printf("[Broadcasted]: ");
     for (int i = 1; i <= msg_len; i++) {
         printf("%c", msg[i]);
     }
@@ -269,7 +261,7 @@ int main() {
     user_msg_handler = print_callback;
     for (int i = 0; i < 4; i++) {
         printf("Initializing port %d: rx_pin=%d, tx_pin=%d\n", i, rx_pins[i], tx_pins[i]);
-        reset_channel(&port_state[i]);
+        reset_channel(&port_states[i]);
         set_mode(gpio_handle, rx_pins[i], PI_INPUT);   // Set RX pin as input
         set_mode(gpio_handle, tx_pins[i], PI_OUTPUT);  // Set TX pin as output
         gpio_write(gpio_handle, tx_pins[i], 1);        // Set TX pin high
@@ -292,8 +284,17 @@ int main() {
         if (strcmp(input_buf, "exit") == 0) {
             break;
         }
-        broadcast_message((uint8_t*)input_buf, (uint8_t)len);
+        
         printf("Sent: %s\n", input_buf);
+ 
+	manchester_transmit(-1, &input_buf[0], len);
+	printf("Broadcasted: "); 
+	for (int i = 1; i <= len; i++){
+	printf("%c", input_buf[i]);
+	}
+printf("\n");
+fflush(stdout); 
+
         usleep(100000);
     }
 
