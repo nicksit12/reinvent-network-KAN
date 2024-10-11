@@ -90,6 +90,10 @@ static void bit_to_char(int ch_index) {
         uint8_t received_checksum = received_msg[msg_len - 1];
         uint8_t computed_checksum = compute_checksum(&received_msg[1], expected_len - 2);
 
+        printf("Received checksum: 0x%02X\n", received_checksum);
+        printf("Computed checksum: 0x%02X\n", computed_checksum);
+        
+
         if (computed_checksum == received_checksum) {
             // Checksum matches
             if (user_msg_handler != NULL) {
