@@ -4,13 +4,14 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
+//#include "linkLayer.h"
 
 #define BUFFER_SIZE 128
 #define BIT_DURATION_US 5000
 
-static int rx_pins[] = {26, 24, 22, 20};
-static int tx_pins[] = {27, 25, 23, 21};
-static int gpio_handle = -1;
+int rx_pins[] = {26, 24, 22, 20};
+int tx_pins[] = {27, 25, 23, 21};
+int gpio_handle = -1;
 
 // Structure to maintain the state of each communication link (port)
 typedef struct {
@@ -29,10 +30,10 @@ typedef void (*msg_callback_t)(uint8_t* msg, int ch);
 static msg_callback_t user_msg_handler;
 
 // Array to hold the state of each port
-static ChannelState port_states[4];
+ChannelState port_states[4];
 
 // Buffer to hold the final received message
-static uint8_t received_msg[BUFFER_SIZE];
+uint8_t received_msg[BUFFER_SIZE];
 
 // Function to map a GPIO pin number to the corresponding port index
 static int gpio_to_port(unsigned gpio_pin) {
@@ -86,14 +87,13 @@ static void bit_to_char(int ch_index) {
         for (int j = 0; j < msg_len; j++) {
             received_msg[j] = ch_state->msg_buffer[j];
         }
-        // New logic for checksum match 
-        uint8_t received_checksum = received_msg[msg_len - 1];
-        uint8_t computed_checksum = compute_checksum(&received_msg[1], expected_len - 2);
+        // New logic for checksum match
+	printf("msg_len is: %d \n", msg_len);	
+        uint8_t received_checksum = received_msg[msg_len-1];
+        uint8_t computed_checksum = compute_checksum(&received_msg[1], expected_len - 1);
 
-        printf("Received checksum: 0x%02X\n", received_checksum);
-        printf("Computed checksum: 0x%02X\n", computed_checksum);
-        
-
+	printf(" Recieved checksum:0x%02x\n ", received_checksum);
+	printf("Computed checksum: 0x%02x\n ", computed_checksum);
         if (computed_checksum == received_checksum) {
             // Checksum matches
             if (user_msg_handler != NULL) {
@@ -293,7 +293,7 @@ int main() {
  
 	manchester_transmit(-1, &input_buf[0], len);
 	printf("Broadcasted: "); 
-	for (int i = 1; i <= len; i++){
+	for (int i = 0; i <= len-1; i++){
 	printf("%c", input_buf[i]);
 	}
 printf("\n");
