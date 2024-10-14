@@ -1,53 +1,54 @@
-
 #ifndef LINK_LAYER_H
 #define LINK_LAYER_H
 
 #include <stdint.h>
-#include <pigpiod_if2.h>
 
+//constants
 #define BUFFER_SIZE 128
 #define BIT_DURATION_US 5000
 
-extern int rx_pins[];
-extern int tx_pins[];
-
-extern int gpio_handle;
-
-typedef struct {
-   uint8_t half_bit_signal;
-   uint8_t sync_detected;
-   uint32_t prev_tick;
-   uint32_t margin;
-   uint8_t bit_buffer[8];
-   int bit_pos;
-   uint8_t msg_buffer[BUFFER_SIZE];
-   int msg_pos;
-} ChannelState;
-
-extern ChannelState port_state[4];
-extern uint8_t received_msg[BUFFER_SIZE];
-
-//Callback function type definition for message handling
+//function pointer for message callback
 typedef void (*msg_callback_t)(uint8_t* msg, int ch);
 
-//Function prototypes for the link layer
+/**
+ * @brief initialize link layer, set up GPIOs and callbacks
+ * @return 0 on success, non-zero if failed
+ */
+int initialize_link_layer();
 
-//Function to determine which port corresponds to a GPIO pin
-int gpio_to_port(unsigned gpio_pin);
+/**
+ * @brief reset the state of the specified channel
+ * @param ch index of the channel to reset (0-3) 
+ */
+void reset_channel_state(int ch);
 
-//Function to reset the port state
-void reset_channel(ChannelState *ch_state);
+/**
+ * @brief set the callback function to handle received messages
+ * @param callback the function pointer for the callback
+ */
+void set_msg_callback(msg_callback_t callback);
 
-//Function to convert bits to full byte
-void bit_to_char(int ch_index);
+/**
+ * @brief transmit a message using Manchester encoding on a specific channel
+ * @param ch the index of the channel (0-3) or -1 to broadcast to all channels 
+ * @param data pointer to the data to be transmitted
+ * @param len the length of the data to be transmitted
+ */
+void manchester_transmit(int ch, uint8_t *data, uint8_t len);
 
-//Handle received signal edges
-void rx_callback(int pi, unsigned gpio, unsigned level, uint32_t tick);
+/**
+ * @brief compute the checksum for the given data 
+ * @param data pointer to the data
+ * @param len the length of the data array
+ * @return the computed checksum.
+ */
+uint8_t compute_checksum(uint8_t *data, uint8_t len);
 
-//Function to transmit a message using Manchester encoding
-void manchester_transmit(int port, uint8_t *msg, int len);
+/**
+ * @brief print the received message for debugging purposes
+ * @param msg the message data
+ * @param ch the channel index from which the message was received
+ */
+void print_callback(uint8_t* msg, int ch);
 
-//Print callback to handle received message
-void print_callback(uint8_t* msg, int port);
-
-#endif
+#endif // LINK_LAYER_H
