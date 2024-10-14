@@ -1,0 +1,33 @@
+Key components to model in the UML:
+NIC:
+Handles initialization of GPIO pins and channels.
+Contains functions to broadcast and transmit messages.
+Manages the callback for GPIO edge detection and message handling.
+
+ChannelState:
+Stores the state of each channel, including the bit buffer, message buffer, synchronization status, etc.
+Functions like resetting the channel and processing full bytes.
+GPIO (pigpio):
+
+Functions like pigpio_start, pigpio_stop, and callback interact with the GPIO library for input/output control.
+Message Handling:
+
+The message handler (my_msg_handler) processes incoming messages for each channel.
+UML Diagram Structure:
+NIC (Main controller)
+
+Attributes:
+rx_pins[], tx_pins[], gpio_handle, channel_state[], last_received_msg[], user_msg_handler
+Methods:
+nic_init(), transmit_message(), broadcast_message(), reset_channel(), process_full_byte(), on_gpio_edge()
+ChannelState (State for each channel)
+
+Attributes:
+short_pulse_seen, sync_detected, prev_tick, expected_duration, bit_buffer[], bit_pos, msg_buffer[], msg_pos
+Methods:
+reset_channel(), process_full_byte()
+GPIO (External library)
+
+Methods:
+pigpio_start(), pigpio_stop(), set_mode(), gpio_write(), callback()
+
