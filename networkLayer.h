@@ -15,7 +15,7 @@
 void network_layer_init();
 
 /**
- * @brief initialize link layer, set up GPIOs and callbacks
+ * @brief send a packet to a specific destination address
  * @param dest_addr the address we want to send to
  * @param data pointer to the data being transmitted 
  * @param len the length of the data being transmitted 
