@@ -3,39 +3,40 @@
 #include "network_layer.h"
 
 int main() {
-    // Initialize the network layer
+    //initialize network layer
     network_layer_init();
 
     char input_buf[256];
-    uint8_t dest_ip[IP_ADDR_LEN];
+    uint8_t dest_addr;
 
     while (1) {
-        // Ask the user for the destination IP
-        printf("> Enter destination IP (format: xxx.xxx.xxx.xxx, or 'exit' to quit): ");
+        //ask the user for destination device
+        printf("> Enter destination device (1-255, or 'exit' to quit): ");
         fflush(stdout);
 
         if (fgets(input_buf, sizeof(input_buf), stdin) == NULL) {
             break;
         }
 
-        // Remove newline character from input
+        //remove newline character from input
         size_t len = strlen(input_buf);
         if (len > 0 && input_buf[len - 1] == '\n') {
             input_buf[len - 1] = '\0';
         }
 
-        // Exit condition
+        //an exit condition
         if (strcmp(input_buf, "exit") == 0) {
             break;
         }
 
-        // Parse destination IP
-        if (sscanf(input_buf, "%hhu.%hhu.%hhu.%hhu", &dest_ip[0], &dest_ip[1], &dest_ip[2], &dest_ip[3]) != 4) {
-            printf("Invalid IP address format.\n");
+        //convert destination input to a 1-byte address
+        dest_addr = (uint8_t)atoi(input_buf);
+        if (dest_addr < 1 || dest_addr > 255) {
+            printf("Invalid address. Please enter a value between 1 and 255.\n");
             continue;
         }
 
-        // Ask the user for the message to send
+        //ask the user for the message to send to device 
         printf("> Enter message: ");
         fflush(stdout);
 
@@ -43,19 +44,19 @@ int main() {
             break;
         }
 
-        // Remove newline character from message
+        //remove newline character from message
         len = strlen(input_buf);
         if (len > 0 && input_buf[len - 1] == '\n') {
             input_buf[len - 1] = '\0';
         }
 
-        // Send the packet using the network layer
-        send_packet(dest_ip, (uint8_t*)input_buf, (uint8_t)strlen(input_buf));
+        //send the packet using the network layer
+        send_packet(dest_addr, (uint8_t*)input_buf, (uint8_t)strlen(input_buf));
 
-        printf("[Sent]: %s to IP: %d.%d.%d.%d\n", input_buf, dest_ip[0], dest_ip[1], dest_ip[2], dest_ip[3]);
+        printf("[Sent]: %s to Device: %d\n", input_buf, dest_addr);
         fflush(stdout);
 
-        usleep(100000); // Sleep to allow time for transmission
+        usleep(100000); //sleep to allow time for transmission
     }
 
     return 0;
