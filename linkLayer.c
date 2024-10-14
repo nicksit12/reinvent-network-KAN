@@ -45,7 +45,7 @@ static int gpio_to_port(unsigned gpio_pin) {
     return -1; 
 }
 
-//  reset the state of a communication channel (port)
+// Reset the state of a communication channel (port)
 static void reset_channel(ChannelState *ch_state) {
     ch_state->half_bit_signal = 0;
     ch_state->sync_detected = 0;
@@ -64,8 +64,7 @@ static uint8_t compute_checksum(uint8_t *data, uint8_t len) {
     return (uint8_t)(sum % 256);
 }
 
-
-// convert received bits into a character and assemble the message
+// Convert received bits into a character and assemble the message
 static void bit_to_char(int ch_index) {
     ChannelState *ch_state = &port_states[ch_index];
     uint8_t full_byte = 0;
@@ -80,20 +79,21 @@ static void bit_to_char(int ch_index) {
 
     ch_state->msg_buffer[ch_state->msg_pos++] = full_byte;
 
-    uint8_t expected_len = ch_state->msg_buffer[0];
+    uint8_t expected_len = ch_state->msg_buffer[0]; // Number of data bytes
 
-    if (ch_state->msg_pos == expected_len) {
+    if (ch_state->msg_pos == expected_len + 2) {
         int msg_len = ch_state->msg_pos;
         for (int j = 0; j < msg_len; j++) {
             received_msg[j] = ch_state->msg_buffer[j];
         }
-        // New logic for checksum match
-	printf("msg_len is: %d \n", msg_len);	
-        uint8_t received_checksum = received_msg[msg_len-1];
-        uint8_t computed_checksum = compute_checksum(&received_msg[1], expected_len - 1);
 
-	printf(" Recieved checksum:0x%02x\n ", received_checksum);
-	printf("Computed checksum: 0x%02x\n ", computed_checksum);
+        uint8_t received_checksum = received_msg[expected_len + 1];
+        uint8_t computed_checksum = compute_checksum(&received_msg[1], expected_len);
+
+        printf("msg_len is: %d \n", msg_len);    
+        printf("Received checksum: 0x%02x\n", received_checksum);
+        printf("Computed checksum: 0x%02x\n", computed_checksum);
+
         if (computed_checksum == received_checksum) {
             // Checksum matches
             if (user_msg_handler != NULL) {
@@ -206,7 +206,7 @@ void manchester_transmit(int ch, uint8_t *data, uint8_t len) {
     for (int i = 0; i < total_bytes; i++) {
         uint8_t byte_data;
         if (i == 0) {
-            byte_data = len + 1; // Length byte
+            byte_data = len; 
         } else if (i == total_bytes - 1) {
             byte_data = checksum; // Checksum byte
         } else {
@@ -239,13 +239,10 @@ void manchester_transmit(int ch, uint8_t *data, uint8_t len) {
     usleep(BIT_DURATION_US * (2 + (8 * total_bytes) + 2));
 }
 
-
-
 void print_callback(uint8_t* msg, int ch) {
-    
-    uint8_t msg_len = msg[0] - 1; // Adjust length to exclude checksum byte
+    uint8_t msg_len = msg[0]; // Number of data bytes
 
-    printf("\n On Port: %d Recieved: ", ch);
+    printf("\nOn Port: %d Received: ", ch);
     for (int i = 1; i <= msg_len; i++) {
         printf("%c", msg[i]);
     }
@@ -288,16 +285,16 @@ int main() {
         if (strcmp(input_buf, "exit") == 0) {
             break;
         }
-        
+
         printf("Sent: %s\n", input_buf);
- 
-	manchester_transmit(-1, &input_buf[0], len);
-	printf("Broadcasted: "); 
-	for (int i = 0; i <= len-1; i++){
-	printf("%c", input_buf[i]);
-	}
-printf("\n");
-fflush(stdout); 
+
+        manchester_transmit(-1, (uint8_t*)&input_buf[0], len);
+        printf("Broadcasted: "); 
+        for (int i = 0; i < len; i++) {
+            printf("%c", input_buf[i]);
+        }
+        printf("\n");
+        fflush(stdout); 
 
         usleep(100000);
     }
