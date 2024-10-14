@@ -13,29 +13,29 @@ int rx_pins[] = {26, 24, 22, 20};
 int tx_pins[] = {27, 25, 23, 21};
 int gpio_handle = -1;
 
-// Structure to maintain the state of each communication link (port)
+//structure to maintain the state of each communication link (port)
 typedef struct {
-    uint8_t half_bit_signal;        // Flag for detecting half bits in Manchester decoding
-    uint8_t sync_detected;          // Flag to indicate if synchronization has been detected
-    uint32_t prev_tick;             // Timestamp of the previous GPIO event
-    uint32_t margin;                // Time margin for timing comparisons
-    uint8_t bit_buffer[8];          // Buffer to store bits of a byte during reception
-    int bit_pos;                    // Current position in the bit buffer
-    uint8_t msg_buffer[BUFFER_SIZE];// Buffer to store the received message
-    int msg_pos;                    // Current position in the message buffer
+    uint8_t half_bit_signal;        //flag for detecting half bits in Manchester decoding
+    uint8_t sync_detected;          //flag to indicate if synchronization has been detected
+    uint32_t prev_tick;             //timestamp of the previous GPIO event
+    uint32_t margin;                //time margin for timing comparisons
+    uint8_t bit_buffer[8];          //buffer to store bits of a byte during reception
+    int bit_pos;                    //current position in the bit buffer
+    uint8_t msg_buffer[BUFFER_SIZE];//buffer to store the received message
+    int msg_pos;                    //current position in the message buffer
 } ChannelState;
 
-// Reimplement the callback function 
+//reimplement callback function 
 typedef void (*msg_callback_t)(uint8_t* msg, int ch);
 static msg_callback_t user_msg_handler;
 
-// Array to hold the state of each port
+//array to hold state of each port
 ChannelState port_states[4];
 
-// Buffer to hold the final received message
+//buffer to hold the final message received
 uint8_t received_msg[BUFFER_SIZE];
 
-// Function to map a GPIO pin number to the corresponding port index
+//function to map a GPIO pin number to the corresponding port index
 static int gpio_to_port(unsigned gpio_pin) {
     for (int i = 0; i < 4; i++) {
         if (rx_pins[i] == (int)gpio_pin) {
@@ -45,7 +45,7 @@ static int gpio_to_port(unsigned gpio_pin) {
     return -1; 
 }
 
-// Reset the state of a communication channel (port)
+//function to reset the state of a communication channel (port)
 static void reset_channel(ChannelState *ch_state) {
     ch_state->half_bit_signal = 0;
     ch_state->sync_detected = 0;
@@ -56,6 +56,7 @@ static void reset_channel(ChannelState *ch_state) {
     ch_state->margin = BIT_DURATION_US;
 }
 
+//function to compute the checksum
 static uint8_t compute_checksum(uint8_t *data, uint8_t len) {
     uint16_t sum = 0;
     for (uint8_t i = 0; i < len; i++) {
@@ -64,7 +65,7 @@ static uint8_t compute_checksum(uint8_t *data, uint8_t len) {
     return (uint8_t)(sum % 256);
 }
 
-// Convert received bits into a character and assemble the message
+//convert received bits into a byte then into character and assemble the message
 static void bit_to_char(int ch_index) {
     ChannelState *ch_state = &port_states[ch_index];
     uint8_t full_byte = 0;
@@ -79,7 +80,7 @@ static void bit_to_char(int ch_index) {
 
     ch_state->msg_buffer[ch_state->msg_pos++] = full_byte;
 
-    uint8_t expected_len = ch_state->msg_buffer[0]; // Number of data bytes
+    uint8_t expected_len = ch_state->msg_buffer[0]; //number of data bytes
 
     if (ch_state->msg_pos == expected_len + 2) {
         int msg_len = ch_state->msg_pos;
@@ -95,12 +96,12 @@ static void bit_to_char(int ch_index) {
         printf("Computed checksum: 0x%02x\n", computed_checksum);
 
         if (computed_checksum == received_checksum) {
-            // Checksum matches
+            //if checksum matches
             if (user_msg_handler != NULL) {
                 user_msg_handler(received_msg, ch_index);
             }
         } else {
-            // Checksum error
+            //if there's a checksum error
             printf("\n[Port %d] Checksum mismatch. Discarding message.\n", ch_index);
             fflush(stdout);
         }
@@ -111,17 +112,17 @@ static void bit_to_char(int ch_index) {
     memset(ch_state->bit_buffer, 0, sizeof(ch_state->bit_buffer));
 }
 
-// Callback function triggered on edge detection for receiving data
+//callback function triggered on edge detection
 static void rx_callback(int pi, unsigned gpio, unsigned level, uint32_t tick) {
     int ch_index = gpio_to_port(gpio); 
     if (ch_index == -1) return;
 
     ChannelState *ch_state = &port_states[ch_index]; 
 
-    // Calculate the time difference between the current and previous signal edges
+    //calculate the time difference between the current and previous signal edges (for our purposes to see if it's working)
     uint32_t time_diff = (tick >= ch_state->prev_tick) ? (tick - ch_state->prev_tick) 
                                                         : ((UINT32_MAX - ch_state->prev_tick) + tick);
-    // Calculate the ratio of the time difference to the expected bit duration
+    //calculate the ratio of the time difference to the expected bit duration (for our purposes to see if it's working)
     float margin_ratio = (float)time_diff / ch_state->margin; 
 
     printf("RX Callback on port %d: level=%d, tick=%u, time_diff=%u, margin_ratio=%.2f\n", 
@@ -131,68 +132,68 @@ static void rx_callback(int pi, unsigned gpio, unsigned level, uint32_t tick) {
         printf("Sync detected on port %d\n", ch_index);
 
         if (margin_ratio > 0.8f && margin_ratio < 1.2f) { 
-            // Full bit duration detected, store the level as a bit
+            //full bit duration is detected, store the level as a bit
             printf("full bit detected on link %d\n", ch_index);
             ch_state->bit_buffer[ch_state->bit_pos++] = level; 
         } else if (margin_ratio > 0.4f && margin_ratio < 0.6f) {
-            // Half bit duration detected, handle Manchester encoding
+            //half bit duration is detected, Manchester encoding
             printf("Half bit detected on link %d\n", ch_index);
             if (ch_state->half_bit_signal == 0) {
                 ch_state->half_bit_signal = 1; 
             } else {
-                // Combine two half bits to form a full bit
+                //combine two half bits to form a full bit
                 ch_state->bit_buffer[ch_state->bit_pos++] = level; 
                 ch_state->half_bit_signal = 0;
             }
         } else { 
-            // If timing is off, reset the channel to resynchronize
+            //if the timing is off, reset the channel to resynchronize and start again
             printf("Timing error on port %d, resetting channel\n", ch_index);
             reset_channel(ch_state); 
         }
 
-        // If 8 bits have been collected, convert them into a byte
+        //if 8 bits have been collected, convert them into a byte
         if (ch_state->bit_pos == 8) { 
             bit_to_char(ch_index); 
         }
     } else {
-        // Detect synchronization pattern to start message reception
+        //detect the synchronization pattern to start message reception
         if (margin_ratio > 0.8f && margin_ratio < 1.2f && level == 1) { 
             ch_state->sync_detected = 1; 
             printf("Sync pattern detected on port %d\n", ch_index);
         }
     }
 
-    // Update the timestamp of the last signal edge
+    //update the timestamp of the last signal edge
     ch_state->prev_tick = tick;
 }
 
-// Function to transmit data using Manchester encoding over the network
+//function to transmit data using Manchester encoding over the network
 void manchester_transmit(int ch, uint8_t *data, uint8_t len) {
     int32_t gpio_pin = 0;
 
     if (ch >= 0 && ch < 4) {
-        // Transmit on a specific port
+        //transmit to a specific port
         gpio_pin = 1 << tx_pins[ch];
     } else {
-        // Transmit to all ports
+        //transmit to all ports
         for (int i = 0; i < 4; i++) {
             gpio_pin |= (1 << tx_pins[i]);
         }
     }
 
-    // Clear any existing waveforms
+    //clear any existing waveforms we have 
     wave_clear(gpio_handle);
 
-    // Calculate checksum for error detection
+    //calculate checksum for error detection
     uint8_t checksum = compute_checksum(data, len);
-    int total_bytes = len + 2; // Length byte + data bytes + checksum byte
+    int total_bytes = len + 2; //the length byte + data bytes + checksum byte
 
     int num_pulses = 3 + (16 * total_bytes);
 
     gpioPulse_t pulses[num_pulses];
     int pulse_idx = 0;
 
-    // Sync pulses
+    //sync pulses
     pulses[pulse_idx++] = (gpioPulse_t){.gpioOn = gpio_pin, .gpioOff = 0, .usDelay = BIT_DURATION_US / 2};
     pulses[pulse_idx++] = (gpioPulse_t){.gpioOn = 0, .gpioOff = gpio_pin, .usDelay = BIT_DURATION_US};
     pulses[pulse_idx++] = (gpioPulse_t){.gpioOn = gpio_pin, .gpioOff = 0, .usDelay = BIT_DURATION_US / 2};
@@ -208,9 +209,9 @@ void manchester_transmit(int ch, uint8_t *data, uint8_t len) {
         if (i == 0) {
             byte_data = len; 
         } else if (i == total_bytes - 1) {
-            byte_data = checksum; // Checksum byte
+            byte_data = checksum; //the checksum byte
         } else {
-            byte_data = data[i - 1]; // Data bytes
+            byte_data = data[i - 1]; //the data bytes
         }
         printf("Transmitting byte %d: 0x%02X\n", i, byte_data);
         for (int bit = 7; bit >= 0; bit--) {
@@ -218,11 +219,11 @@ void manchester_transmit(int ch, uint8_t *data, uint8_t len) {
             printf("Bit %d: %d\n", bit, bit_val);
 
             if (bit_val == 1) {
-                // Transmit '1' bits (Manchester encoding)
+                //transmit '1' bits (Manchester encoding)
                 pulses[pulse_idx++] = (gpioPulse_t){.gpioOn = 0, .gpioOff = gpio_pin, .usDelay = BIT_DURATION_US / 2};
                 pulses[pulse_idx++] = (gpioPulse_t){.gpioOn = gpio_pin, .gpioOff = 0, .usDelay = BIT_DURATION_US / 2};
             } else {
-                // Transmit '0' bits
+                //transmit '0' bits
                 pulses[pulse_idx++] = (gpioPulse_t){.gpioOn = gpio_pin, .gpioOff = 0, .usDelay = BIT_DURATION_US / 2};
                 pulses[pulse_idx++] = (gpioPulse_t){.gpioOn = 0, .gpioOff = gpio_pin, .usDelay = BIT_DURATION_US / 2};
             }
@@ -240,7 +241,7 @@ void manchester_transmit(int ch, uint8_t *data, uint8_t len) {
 }
 
 void print_callback(uint8_t* msg, int ch) {
-    uint8_t msg_len = msg[0]; // Number of data bytes
+    uint8_t msg_len = msg[0]; //the number of data bytes
 
     printf("\nOn Port: %d Received: ", ch);
     for (int i = 1; i <= msg_len; i++) {
@@ -263,10 +264,10 @@ int main() {
     for (int i = 0; i < 4; i++) {
         printf("Initializing port %d: rx_pin=%d, tx_pin=%d\n", i, rx_pins[i], tx_pins[i]);
         reset_channel(&port_states[i]);
-        set_mode(gpio_handle, rx_pins[i], PI_INPUT);   // Set RX pin as input
-        set_mode(gpio_handle, tx_pins[i], PI_OUTPUT);  // Set TX pin as output
-        gpio_write(gpio_handle, tx_pins[i], 1);        // Set TX pin high
-        callback(gpio_handle, rx_pins[i], EITHER_EDGE, rx_callback); // Set up callback for RX pin
+        set_mode(gpio_handle, rx_pins[i], PI_INPUT);   //set RX pin as input
+        set_mode(gpio_handle, tx_pins[i], PI_OUTPUT);  //set TX pin as output
+        gpio_write(gpio_handle, tx_pins[i], 1);        //set TX pin high
+        callback(gpio_handle, rx_pins[i], EITHER_EDGE, rx_callback); //set up callback for RX pin
     }
     usleep(100000);
 
